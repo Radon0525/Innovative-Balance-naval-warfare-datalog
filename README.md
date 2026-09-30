@@ -1,3 +1,5 @@
+# DLは自己責任でお願いします！！
+
 # Innovative Balance Naval Warfare Datalog
 
 HOI4の大型砲と航空対艦攻撃の命中・成功数、耐久・指揮統制ダメージを記録するWindows用ツールです。通常版のみを配布します。
