@@ -1,0 +1,1212 @@
+[
+  {
+    "version": "1.19.2.0.a729",
+    "sha256": "870ebf1f615262facca48a3b947775c41f0a5338f3068c40958209f5c41c65ad",
+    "probes": {
+      "heavy": {
+        "rva": 26610844,
+        "bytes": "48394dc80f8eff040000488b8be80000",
+        "entry_rva": 26610192,
+        "entry_bytes": "4c894c24204489442418488954241048894c2408555356574154415541564157"
+      },
+      "air": {
+        "rva": 26638130,
+        "bytes": "4863d885c00f8e3fffffff4d8bcc488d",
+        "entry_rva": 26637776,
+        "entry_bytes": "48895c2410488974241848897c242048894c2408554154415541564157488bec"
+      }
+    },
+    "details_layout": {
+      "registry": {
+        "small": 54759008,
+        "medium": 54759000,
+        "large": 54758992
+      },
+      "checks": [
+        {
+          "rva": 35693520,
+          "bytes": "4883ec288b013d681200007624488b056cea22014885c07459488bd1488bc8e8"
+        },
+        {
+          "rva": 35685344,
+          "bytes": "48895c2408488b59084c8bd14c635914448b02448b4a04418bc048c1e0204903"
+        },
+        {
+          "rva": 26619776,
+          "bytes": "48895c241048896c241848894c2408565741564883ec20498bf8488bd9488d05"
+        },
+        {
+          "rva": 26632384,
+          "bytes": "48895c24105556574154415541564157488bec4883ec504533f6450fb6e14438"
+        },
+        {
+          "rva": 29708368,
+          "bytes": "48895c240848896c24104889742418574883ec2033db488bea488bf13959147e"
+        },
+        {
+          "rva": 12225968,
+          "bytes": "48895c2408488974241048897c24185541564157488d6c24804881ec80010000"
+        },
+        {
+          "rva": 22740656,
+          "bytes": "48895c240848896c24104889742418574883ec20488bd9e834b5e1ff33f6488d"
+        },
+        {
+          "rva": 12213280,
+          "bytes": "40534883ec3048833d6212770200488bd90f84b70000008339000f84ae000000"
+        },
+        {
+          "rva": 12753440,
+          "bytes": "488b81180800004883c060c3"
+        },
+        {
+          "rva": 12719552,
+          "bytes": "488b81280700004805d8010000c3cc"
+        },
+        {
+          "rva": 12213280,
+          "bytes": "40534883ec3048833d6212770200488bd90f84b70000008339000f84ae000000"
+        },
+        {
+          "rva": 12865472,
+          "bytes": "48895c2408574883ec70488bfa33c089442420488b51684885d20f85fd000000"
+        }
+      ],
+      "game_state": 53571216
+    },
+    "damage_layout": {
+      "fixed_scale": 100000,
+      "helpers": [
+        {
+          "name": "ship",
+          "entry_rva": 12773792,
+          "entry_bytes": "48895c241048896c241848897424205741544155415641574883ec404c8bf945",
+          "str_offset": 1784,
+          "org_offset": 1792,
+          "returns": [
+            {
+              "kind": "heavy",
+              "call_rva": 26611748,
+              "call_bytes": "e877d92cff",
+              "return_rva": 26611753
+            },
+            {
+              "kind": "air",
+              "call_rva": 26638877,
+              "call_bytes": "e87e6f2cff",
+              "return_rva": 26638882
+            }
+          ]
+        },
+        {
+          "name": "convoy",
+          "entry_rva": 28064720,
+          "entry_bytes": "4c8bd1b864000000488b4920482bca8bd04d8b5a1849894a204d8b8be8020000",
+          "str_offset": 32,
+          "org_offset": 40,
+          "returns": [
+            {
+              "kind": "heavy",
+              "call_rva": 26611953,
+              "call_bytes": "e8da2a1600",
+              "return_rva": 26611958
+            },
+            {
+              "kind": "air",
+              "call_rva": 26638965,
+              "call_bytes": "e856c11500",
+              "return_rva": 26638970
+            }
+          ]
+        }
+      ]
+    },
+    "air_trace_layout": {
+      "checks": [
+        {
+          "rva": 26638064,
+          "bytes": "488bde488d4dd8480fafda488d15ce2e"
+        },
+        {
+          "rva": 26638093,
+          "bytes": "488d4de0480faf18488bc748f7eb48c1"
+        },
+        {
+          "rva": 26638159,
+          "bytes": "498bce4c69f3a0860100482b08488bc7"
+        },
+        {
+          "rva": 26638227,
+          "bytes": "488bc7498bc8480faf0db75d9b014c0f"
+        },
+        {
+          "rva": 26638325,
+          "bytes": "4c8b00bea0860100488b0d3c5d9b0148"
+        },
+        {
+          "rva": 26638448,
+          "bytes": "b9a0860100482b08b800000000480f48"
+        },
+        {
+          "rva": 26638531,
+          "bytes": "33c98bd94839387d63480faf35ec5b9b"
+        },
+        {
+          "rva": 26638642,
+          "bytes": "48394dc87f0a48394dd00f8e3afdffff"
+        },
+        {
+          "rva": 26638702,
+          "bytes": "84c0755e488bcb49b809e1d1c6116bf1"
+        },
+        {
+          "rva": 26638804,
+          "bytes": "c7442428060000004d8bcfba03000000"
+        },
+        {
+          "rva": 26638025,
+          "bytes": "480faf15ff5d9b01"
+        },
+        {
+          "rva": 26638233,
+          "bytes": "480faf0db75d9b01"
+        },
+        {
+          "rva": 26638241,
+          "bytes": "4c0faf05275e9b01"
+        },
+        {
+          "rva": 26638333,
+          "bytes": "488b0d3c5d9b01"
+        },
+        {
+          "rva": 26638350,
+          "bytes": "480faf0d2a5c9b01"
+        },
+        {
+          "rva": 26638540,
+          "bytes": "480faf35ec5b9b01"
+        },
+        {
+          "rva": 26638679,
+          "bytes": "488b150a339b01"
+        },
+        {
+          "rva": 26592782,
+          "bytes": "48895424304d85c0741d4533c0488d54"
+        },
+        {
+          "rva": 26592821,
+          "bytes": "48c703000000004885d27e634c8b05e8"
+        },
+        {
+          "rva": 26592855,
+          "bytes": "488b0d02e29b01480faf0848b809e1d1"
+        },
+        {
+          "rva": 26592833,
+          "bytes": "4c8b05e8e29b01"
+        },
+        {
+          "rva": 26592855,
+          "bytes": "488b0d02e29b01"
+        },
+        {
+          "rva": 26592917,
+          "bytes": "488b058ce39b01"
+        },
+        {
+          "rva": 26640864,
+          "bytes": "488bc44c8948204c894018488950104889480855535657415441554156415748"
+        },
+        {
+          "rva": 26641245,
+          "bytes": "488b5c24784885db7e8e488b75804885"
+        },
+        {
+          "rva": 26641323,
+          "bytes": "498bc7480fafc14889442450488d4c24"
+        },
+        {
+          "rva": 26641345,
+          "bytes": "8944244885c00f8e28ffffff488b8500"
+        },
+        {
+          "rva": 26642396,
+          "bytes": "89442444418bcf2bc84863c9490fafce"
+        },
+        {
+          "rva": 26642543,
+          "bytes": "448b7424444403f04489742444452bfe"
+        },
+        {
+          "rva": 26642722,
+          "bytes": "48837c2460007422488bcb480faf0d1b"
+        },
+        {
+          "rva": 26642791,
+          "bytes": "e864ecffff8bf0894424484180bd0c01"
+        },
+        {
+          "rva": 26642733,
+          "bytes": "480faf0d1b4d9b01"
+        },
+        {
+          "rva": 26614515,
+          "bytes": "84c00f859c000000480faf9f68050000"
+        },
+        {
+          "rva": 26614523,
+          "bytes": "480faf9f6805000048b809e1d1c6116b"
+        },
+        {
+          "rva": 26614574,
+          "bytes": "488b4c24504885c97e4e48b8feffffff"
+        },
+        {
+          "rva": 26614625,
+          "bytes": "4881fba08601007d1c41b8f402000048"
+        },
+        {
+          "rva": 26614657,
+          "bytes": "4839187d114d8bc6498bd7488bcfe82c"
+        },
+        {
+          "rva": 12734612,
+          "bytes": "e8d79d5f01488b08480fafcb49ba09e1"
+        },
+        {
+          "rva": 12734617,
+          "bytes": "488b08480fafcb49ba09e1d1c6116bf1"
+        },
+        {
+          "rva": 12734698,
+          "bytes": "488b8f480100004c8b8c24c800000049"
+        },
+        {
+          "rva": 26630016,
+          "bytes": "488bc4488958104c8948204c894018488948085556574154415541564157488d"
+        },
+        {
+          "rva": 26631011,
+          "bytes": "4863d8895c2438498d8e900000008974"
+        },
+        {
+          "rva": 26631046,
+          "bytes": "448bce448b442440488d55e7498bcee8"
+        },
+        {
+          "rva": 26631248,
+          "bytes": "49015500448bce448b442440488d55ef"
+        },
+        {
+          "rva": 26631428,
+          "bytes": "85c04c8b7d9f0f8e9800000048984869"
+        },
+        {
+          "rva": 26631592,
+          "bytes": "48bf09e1d1c6116bf12948837d77000f"
+        },
+        {
+          "rva": 26631642,
+          "bytes": "488b084881c1a0860100490faf4d0048"
+        },
+        {
+          "rva": 26631795,
+          "bytes": "488b454f80b881000000007424488b88"
+        },
+        {
+          "rva": 16039312,
+          "bytes": "405355564155415641574883ec38458bf84c8bf241b834000000488d54247041"
+        },
+        {
+          "rva": 16039354,
+          "bytes": "4c695424701027000048b909e1d1c611"
+        },
+        {
+          "rva": 16039440,
+          "bytes": "488d8ee8020000bba086010083390075"
+        },
+        {
+          "rva": 16039507,
+          "bytes": "480318488d8ec40900008339007f0f48"
+        },
+        {
+          "rva": 16039578,
+          "bytes": "4803184585ff0f8e16020000488d8e90"
+        },
+        {
+          "rva": 16039642,
+          "bytes": "480318e87e6c77ff803d09cd67020044"
+        },
+        {
+          "rva": 16039984,
+          "bytes": "488b08498bc5480faf0f48f7e9498bcc"
+        },
+        {
+          "rva": 16040092,
+          "bytes": "488b08498bc5480faf0f48f7e948c1fa"
+        },
+        {
+          "rva": 16040134,
+          "bytes": "490faf1e4c8b642430498bc5488bbc24"
+        },
+        {
+          "rva": 16039409,
+          "bytes": "480faf157f1f3d02"
+        },
+        {
+          "rva": 16134257,
+          "bytes": "480faf1ddf6a3b02480faf2d9f693b02"
+        },
+        {
+          "rva": 16134455,
+          "bytes": "4885c97418498d04194883f8fc770e49"
+        },
+        {
+          "rva": 16134489,
+          "bytes": "488d5424284889442420488d4c2420e8"
+        },
+        {
+          "rva": 16134509,
+          "bytes": "488b08488d0419488b9c248800000048"
+        },
+        {
+          "rva": 16134570,
+          "bytes": "4883f8647c0eb9a0860100483bc1480f"
+        },
+        {
+          "rva": 16134257,
+          "bytes": "480faf1ddf6a3b02"
+        },
+        {
+          "rva": 16134265,
+          "bytes": "480faf2d9f693b02"
+        },
+        {
+          "rva": 16134392,
+          "bytes": "480faf0dd0693b02"
+        }
+      ],
+      "points": [
+        {
+          "name": "probability",
+          "rva": 26638064
+        },
+        {
+          "name": "hit_random",
+          "rva": 26638093
+        },
+        {
+          "name": "reduction",
+          "rva": 26638159
+        },
+        {
+          "name": "base_damage",
+          "rva": 26638227
+        },
+        {
+          "name": "reliability",
+          "rva": 26638325
+        },
+        {
+          "name": "critical_modifier",
+          "rva": 26638448
+        },
+        {
+          "name": "critical_roll",
+          "rva": 26638531
+        },
+        {
+          "name": "critical_branch",
+          "rva": 26638642
+        },
+        {
+          "name": "special_result",
+          "rva": 26638702
+        },
+        {
+          "name": "final_damage",
+          "rva": 26638804
+        },
+        {
+          "name": "aa_fleet",
+          "rva": 26592782
+        },
+        {
+          "name": "aa_sum",
+          "rva": 26592821
+        },
+        {
+          "name": "aa_power",
+          "rva": 26592855
+        },
+        {
+          "name": "up_stats",
+          "rva": 26641245
+        },
+        {
+          "name": "up_efficiency",
+          "rva": 26641323
+        },
+        {
+          "name": "up_effective_planes",
+          "rva": 26641345
+        },
+        {
+          "name": "up_cap",
+          "rva": 26642396
+        },
+        {
+          "name": "up_aa",
+          "rva": 26642543
+        },
+        {
+          "name": "up_carrier",
+          "rva": 26642722
+        },
+        {
+          "name": "up_call",
+          "rva": 26642791
+        },
+        {
+          "name": "special_gate",
+          "rva": 26614515
+        },
+        {
+          "name": "special_input",
+          "rva": 26614523
+        },
+        {
+          "name": "special_reliability",
+          "rva": 26614574
+        },
+        {
+          "name": "special_threshold",
+          "rva": 26614625
+        },
+        {
+          "name": "special_roll",
+          "rva": 26614657
+        },
+        {
+          "name": "effect_candidates",
+          "rva": 12734612
+        },
+        {
+          "name": "effect_choice",
+          "rva": 12734617
+        },
+        {
+          "name": "effect_apply",
+          "rva": 12734698
+        },
+        {
+          "name": "stat_wing",
+          "rva": 26631011
+        },
+        {
+          "name": "stat_disruption",
+          "rva": 26631046
+        },
+        {
+          "name": "stat_contribution",
+          "rva": 26631248
+        },
+        {
+          "name": "stat_sum",
+          "rva": 26631428
+        },
+        {
+          "name": "stat_average",
+          "rva": 26631592
+        },
+        {
+          "name": "stat_country",
+          "rva": 26631642
+        },
+        {
+          "name": "stat_external",
+          "rva": 26631795
+        },
+        {
+          "name": "wing_raw",
+          "rva": 16039354
+        },
+        {
+          "name": "wing_scaled",
+          "rva": 16039440
+        },
+        {
+          "name": "wing_ace",
+          "rva": 16039507
+        },
+        {
+          "name": "wing_country",
+          "rva": 16039578
+        },
+        {
+          "name": "wing_mission",
+          "rva": 16039642
+        },
+        {
+          "name": "wing_experience",
+          "rva": 16039984
+        },
+        {
+          "name": "wing_weather",
+          "rva": 16040092
+        },
+        {
+          "name": "wing_factor",
+          "rva": 16040134
+        },
+        {
+          "name": "stat_disruption_inputs",
+          "rva": 16134257
+        },
+        {
+          "name": "stat_disruption_denominator",
+          "rva": 16134455
+        },
+        {
+          "name": "stat_disruption_ratio",
+          "rva": 16134489
+        },
+        {
+          "name": "stat_disruption_root",
+          "rva": 16134509
+        },
+        {
+          "name": "stat_disruption_preclamp",
+          "rva": 16134570
+        }
+      ],
+      "globals": {
+        "targetting_to_amount": 53597392,
+        "damage_to_str": 53597528,
+        "damage_to_org": 53597648,
+        "critical_chance_bonus": 53597504,
+        "critical_chance_base": 53597248,
+        "critical_damage": 53597376,
+        "special_parameter": 53587048,
+        "aa_exponent": 53586224,
+        "aa_multiplier": 53586016,
+        "aa_cap": 53586472,
+        "carrier_multiplier": 53597776,
+        "port_attack_multiplier": 53599608,
+        "disruption_attack_factor": 53582680,
+        "disruption_defence_factor": 53582368,
+        "disruption_speed_factor": 53582544
+      },
+      "dispatch_entry": 26640864,
+      "aggregate_entry": 26630016,
+      "wing_attack_entry": 16039312
+    }
+  },
+  {
+    "version": "1.19.3.0.c01a",
+    "sha256": "7dc947be34970da1e1c787bcddbe7f62b610ff258aebf8f06aa8b348f3a031d5",
+    "probes": {
+      "heavy": {
+        "rva": 26690380,
+        "bytes": "48394dc80f8eff040000488b8be80000",
+        "entry_rva": 26689728,
+        "entry_bytes": "4c894c24204489442418488954241048894c2408555356574154415541564157"
+      },
+      "air": {
+        "rva": 26717666,
+        "bytes": "4863d885c00f8e3fffffff4d8bcc488d",
+        "entry_rva": 26717312,
+        "entry_bytes": "48895c2410488974241848897c242048894c2408554154415541564157488bec"
+      }
+    },
+    "details_layout": {
+      "registry": {
+        "small": 54861248,
+        "medium": 54861240,
+        "large": 54861232
+      },
+      "checks": [
+        {
+          "rva": 35779344,
+          "bytes": "4883ec288b013d681200007624488b058c2a23014885c07459488bd1488bc8e8"
+        },
+        {
+          "rva": 35771168,
+          "bytes": "48895c2408488b59084c8bd14c635914448b02448b4a04418bc048c1e0204903"
+        },
+        {
+          "rva": 26699312,
+          "bytes": "48895c241048896c241848894c2408565741564883ec20498bf8488bd9488d05"
+        },
+        {
+          "rva": 26711920,
+          "bytes": "48895c24105556574154415541564157488bec4883ec504533f6450fb6e14438"
+        },
+        {
+          "rva": 29793728,
+          "bytes": "48895c240848896c24104889742418574883ec2033db488bea488bf13959147e"
+        },
+        {
+          "rva": 12288000,
+          "bytes": "48895c2408488974241048897c24185541564157488d6c24804881ec80010000"
+        },
+        {
+          "rva": 22815536,
+          "bytes": "48895c240848896c24104889742418574883ec20488bd9e8b4e1e1ff33f6488d"
+        },
+        {
+          "rva": 12275312,
+          "bytes": "40534883ec3048833de2a3770200488bd90f84b70000008339000f84ae000000"
+        },
+        {
+          "rva": 12816736,
+          "bytes": "488b81180800004883c060c3"
+        },
+        {
+          "rva": 12782848,
+          "bytes": "488b81280700004805d8010000c3cc"
+        },
+        {
+          "rva": 12275312,
+          "bytes": "40534883ec3048833de2a3770200488bd90f84b70000008339000f84ae000000"
+        },
+        {
+          "rva": 12928768,
+          "bytes": "48895c2408574883ec70488bfa33c089442420488b51684885d20f85fd000000"
+        }
+      ],
+      "game_state": 53670496
+    },
+    "damage_layout": {
+      "fixed_scale": 100000,
+      "helpers": [
+        {
+          "name": "ship",
+          "entry_rva": 12837088,
+          "entry_bytes": "48895c241048896c241848897424205741544155415641574883ec404c8bf945",
+          "str_offset": 1784,
+          "org_offset": 1792,
+          "returns": [
+            {
+              "kind": "heavy",
+              "call_rva": 26691284,
+              "call_bytes": "e8079a2cff",
+              "return_rva": 26691289
+            },
+            {
+              "kind": "air",
+              "call_rva": 26718413,
+              "call_bytes": "e80e302cff",
+              "return_rva": 26718418
+            }
+          ]
+        },
+        {
+          "name": "convoy",
+          "entry_rva": 28149264,
+          "entry_bytes": "4c8bd1b864000000488b4920482bca8bd04d8b5a1849894a204d8b8be8020000",
+          "str_offset": 32,
+          "org_offset": 40,
+          "returns": [
+            {
+              "kind": "heavy",
+              "call_rva": 26691489,
+              "call_bytes": "e86a3e1600",
+              "return_rva": 26691494
+            },
+            {
+              "kind": "air",
+              "call_rva": 26718501,
+              "call_bytes": "e8e6d41500",
+              "return_rva": 26718506
+            }
+          ]
+        }
+      ]
+    },
+    "air_trace_layout": {
+      "checks": [
+        {
+          "rva": 26717600,
+          "bytes": "488bde488d4dd8480fafda488d157e65"
+        },
+        {
+          "rva": 26717629,
+          "bytes": "488d4de0480faf18488bc748f7eb48c1"
+        },
+        {
+          "rva": 26717695,
+          "bytes": "498bce4c69f3a0860100482b08488bc7"
+        },
+        {
+          "rva": 26717763,
+          "bytes": "488bc7498bc8480faf0d3fb39b014c0f"
+        },
+        {
+          "rva": 26717861,
+          "bytes": "4c8b00bea0860100488b0dccb29b0148"
+        },
+        {
+          "rva": 26717984,
+          "bytes": "b9a0860100482b08b800000000480f48"
+        },
+        {
+          "rva": 26718067,
+          "bytes": "33c98bd94839387d63480faf355cb19b"
+        },
+        {
+          "rva": 26718178,
+          "bytes": "48394dc87f0a48394dd00f8e3afdffff"
+        },
+        {
+          "rva": 26718238,
+          "bytes": "84c0755e488bcb49b809e1d1c6116bf1"
+        },
+        {
+          "rva": 26718340,
+          "bytes": "c7442428060000004d8bcfba03000000"
+        },
+        {
+          "rva": 26717561,
+          "bytes": "480faf1577b39b01"
+        },
+        {
+          "rva": 26717769,
+          "bytes": "480faf0d3fb39b01"
+        },
+        {
+          "rva": 26717777,
+          "bytes": "4c0faf05bfb39b01"
+        },
+        {
+          "rva": 26717869,
+          "bytes": "488b0dccb29b01"
+        },
+        {
+          "rva": 26717886,
+          "bytes": "480faf0d8ab19b01"
+        },
+        {
+          "rva": 26718076,
+          "bytes": "480faf355cb19b01"
+        },
+        {
+          "rva": 26718215,
+          "bytes": "488b154a849b01"
+        },
+        {
+          "rva": 26672318,
+          "bytes": "48895424304d85c0741d4533c0488d54"
+        },
+        {
+          "rva": 26672357,
+          "bytes": "48c703000000004885d27e634c8b05c8"
+        },
+        {
+          "rva": 26672391,
+          "bytes": "488b0dba329c01480faf0848b809e1d1"
+        },
+        {
+          "rva": 26672369,
+          "bytes": "4c8b05c8339c01"
+        },
+        {
+          "rva": 26672391,
+          "bytes": "488b0dba329c01"
+        },
+        {
+          "rva": 26672453,
+          "bytes": "488b0574349c01"
+        },
+        {
+          "rva": 26720400,
+          "bytes": "488bc44c8948204c894018488950104889480855535657415441554156415748"
+        },
+        {
+          "rva": 26720781,
+          "bytes": "488b5c24784885db7e8e488b75804885"
+        },
+        {
+          "rva": 26720859,
+          "bytes": "498bc7480fafc14889442450488d4c24"
+        },
+        {
+          "rva": 26720881,
+          "bytes": "8944244885c00f8e28ffffff488b8500"
+        },
+        {
+          "rva": 26721932,
+          "bytes": "89442444418bcf2bc84863c9490fafce"
+        },
+        {
+          "rva": 26722079,
+          "bytes": "448b7424444403f04489742444452bfe"
+        },
+        {
+          "rva": 26722258,
+          "bytes": "48837c2460007422488bcb480faf0dd3"
+        },
+        {
+          "rva": 26722327,
+          "bytes": "e864ecffff8bf0894424484180bd0c01"
+        },
+        {
+          "rva": 26722269,
+          "bytes": "480faf0dd3a29b01"
+        },
+        {
+          "rva": 26694051,
+          "bytes": "84c00f859c000000480faf9f68050000"
+        },
+        {
+          "rva": 26694059,
+          "bytes": "480faf9f6805000048b809e1d1c6116b"
+        },
+        {
+          "rva": 26694110,
+          "bytes": "488b4c24504885c97e4e48b8feffffff"
+        },
+        {
+          "rva": 26694161,
+          "bytes": "4881fba08601007d1c41b8f402000048"
+        },
+        {
+          "rva": 26694193,
+          "bytes": "4839187d114d8bc6498bd7488bcfe8bc"
+        },
+        {
+          "rva": 12797908,
+          "bytes": "e8d7f55f01488b08480fafcb49ba09e1"
+        },
+        {
+          "rva": 12797913,
+          "bytes": "488b08480fafcb49ba09e1d1c6116bf1"
+        },
+        {
+          "rva": 12797994,
+          "bytes": "488b8f480100004c8b8c24c800000049"
+        },
+        {
+          "rva": 26709552,
+          "bytes": "488bc4488958104c8948204c894018488948085556574154415541564157488d"
+        },
+        {
+          "rva": 26710547,
+          "bytes": "4863d8895c2438498d8e900000008974"
+        },
+        {
+          "rva": 26710582,
+          "bytes": "448bce448b442440488d55e7498bcee8"
+        },
+        {
+          "rva": 26710784,
+          "bytes": "49015500448bce448b442440488d55ef"
+        },
+        {
+          "rva": 26710964,
+          "bytes": "85c04c8b7d9f0f8e9800000048984869"
+        },
+        {
+          "rva": 26711128,
+          "bytes": "48bf09e1d1c6116bf12948837d77000f"
+        },
+        {
+          "rva": 26711178,
+          "bytes": "488b084881c1a0860100490faf4d0048"
+        },
+        {
+          "rva": 26711331,
+          "bytes": "488b454f80b881000000007424488b88"
+        },
+        {
+          "rva": 16125712,
+          "bytes": "405355564155415641574883ec38458bf84c8bf241b834000000488d54247041"
+        },
+        {
+          "rva": 16125754,
+          "bytes": "4c695424701027000048b909e1d1c611"
+        },
+        {
+          "rva": 16125840,
+          "bytes": "488d8ee8020000bba086010083390075"
+        },
+        {
+          "rva": 16125907,
+          "bytes": "480318488d8ec40900008339007f0f48"
+        },
+        {
+          "rva": 16125978,
+          "bytes": "4803184585ff0f8e16020000488d8e90"
+        },
+        {
+          "rva": 16126042,
+          "bytes": "480318e83ee676ff803de90a68020044"
+        },
+        {
+          "rva": 16126384,
+          "bytes": "488b08498bc5480faf0f48f7e9498bcc"
+        },
+        {
+          "rva": 16126492,
+          "bytes": "488b08498bc5480faf0f48f7e948c1fa"
+        },
+        {
+          "rva": 16126534,
+          "bytes": "490faf1e4c8b642430498bc5488bbc24"
+        },
+        {
+          "rva": 16125809,
+          "bytes": "480faf15575b3d02"
+        },
+        {
+          "rva": 16220657,
+          "bytes": "480faf1d3f9f3b02480faf2def9d3b02"
+        },
+        {
+          "rva": 16220855,
+          "bytes": "4885c97418498d04194883f8fc770e49"
+        },
+        {
+          "rva": 16220889,
+          "bytes": "488d5424284889442420488d4c2420e8"
+        },
+        {
+          "rva": 16220909,
+          "bytes": "488b08488d0419488b9c248800000048"
+        },
+        {
+          "rva": 16220970,
+          "bytes": "4883f8647c0eb9a0860100483bc1480f"
+        },
+        {
+          "rva": 16220657,
+          "bytes": "480faf1d3f9f3b02"
+        },
+        {
+          "rva": 16220665,
+          "bytes": "480faf2def9d3b02"
+        },
+        {
+          "rva": 16220792,
+          "bytes": "480faf0d189e3b02"
+        }
+      ],
+      "points": [
+        {
+          "name": "probability",
+          "rva": 26717600
+        },
+        {
+          "name": "hit_random",
+          "rva": 26717629
+        },
+        {
+          "name": "reduction",
+          "rva": 26717695
+        },
+        {
+          "name": "base_damage",
+          "rva": 26717763
+        },
+        {
+          "name": "reliability",
+          "rva": 26717861
+        },
+        {
+          "name": "critical_modifier",
+          "rva": 26717984
+        },
+        {
+          "name": "critical_roll",
+          "rva": 26718067
+        },
+        {
+          "name": "critical_branch",
+          "rva": 26718178
+        },
+        {
+          "name": "special_result",
+          "rva": 26718238
+        },
+        {
+          "name": "final_damage",
+          "rva": 26718340
+        },
+        {
+          "name": "aa_fleet",
+          "rva": 26672318
+        },
+        {
+          "name": "aa_sum",
+          "rva": 26672357
+        },
+        {
+          "name": "aa_power",
+          "rva": 26672391
+        },
+        {
+          "name": "up_stats",
+          "rva": 26720781
+        },
+        {
+          "name": "up_efficiency",
+          "rva": 26720859
+        },
+        {
+          "name": "up_effective_planes",
+          "rva": 26720881
+        },
+        {
+          "name": "up_cap",
+          "rva": 26721932
+        },
+        {
+          "name": "up_aa",
+          "rva": 26722079
+        },
+        {
+          "name": "up_carrier",
+          "rva": 26722258
+        },
+        {
+          "name": "up_call",
+          "rva": 26722327
+        },
+        {
+          "name": "special_gate",
+          "rva": 26694051
+        },
+        {
+          "name": "special_input",
+          "rva": 26694059
+        },
+        {
+          "name": "special_reliability",
+          "rva": 26694110
+        },
+        {
+          "name": "special_threshold",
+          "rva": 26694161
+        },
+        {
+          "name": "special_roll",
+          "rva": 26694193
+        },
+        {
+          "name": "effect_candidates",
+          "rva": 12797908
+        },
+        {
+          "name": "effect_choice",
+          "rva": 12797913
+        },
+        {
+          "name": "effect_apply",
+          "rva": 12797994
+        },
+        {
+          "name": "stat_wing",
+          "rva": 26710547
+        },
+        {
+          "name": "stat_disruption",
+          "rva": 26710582
+        },
+        {
+          "name": "stat_contribution",
+          "rva": 26710784
+        },
+        {
+          "name": "stat_sum",
+          "rva": 26710964
+        },
+        {
+          "name": "stat_average",
+          "rva": 26711128
+        },
+        {
+          "name": "stat_country",
+          "rva": 26711178
+        },
+        {
+          "name": "stat_external",
+          "rva": 26711331
+        },
+        {
+          "name": "wing_raw",
+          "rva": 16125754
+        },
+        {
+          "name": "wing_scaled",
+          "rva": 16125840
+        },
+        {
+          "name": "wing_ace",
+          "rva": 16125907
+        },
+        {
+          "name": "wing_country",
+          "rva": 16125978
+        },
+        {
+          "name": "wing_mission",
+          "rva": 16126042
+        },
+        {
+          "name": "wing_experience",
+          "rva": 16126384
+        },
+        {
+          "name": "wing_weather",
+          "rva": 16126492
+        },
+        {
+          "name": "wing_factor",
+          "rva": 16126534
+        },
+        {
+          "name": "stat_disruption_inputs",
+          "rva": 16220657
+        },
+        {
+          "name": "stat_disruption_denominator",
+          "rva": 16220855
+        },
+        {
+          "name": "stat_disruption_ratio",
+          "rva": 16220889
+        },
+        {
+          "name": "stat_disruption_root",
+          "rva": 16220909
+        },
+        {
+          "name": "stat_disruption_preclamp",
+          "rva": 16220970
+        }
+      ],
+      "globals": {
+        "targetting_to_amount": 53698808,
+        "damage_to_str": 53698960,
+        "damage_to_org": 53699096,
+        "critical_chance_bonus": 53698944,
+        "critical_chance_base": 53698640,
+        "critical_damage": 53698784,
+        "special_parameter": 53687384,
+        "aa_exponent": 53686464,
+        "aa_multiplier": 53686216,
+        "aa_cap": 53686720,
+        "carrier_multiplier": 53699256,
+        "port_attack_multiplier": 53701328,
+        "disruption_attack_factor": 53682488,
+        "disruption_defence_factor": 53682160,
+        "disruption_speed_factor": 53682328
+      },
+      "dispatch_entry": 26720400,
+      "aggregate_entry": 26709552,
+      "wing_attack_entry": 16125712
+    }
+  }
+]
