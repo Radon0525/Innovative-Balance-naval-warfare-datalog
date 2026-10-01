@@ -110,4 +110,25 @@ class WindowTests(unittest.TestCase):
         report=next(x for x in widgets(history) if isinstance(x,CountryOverview));self.wait(lambda:not report.busy)
         self.assertIsNotNone(report.match_key)
 
+    def test_first_aircraft_tab_and_return_to_damage_table(self):
+        from air_participants import ParticipantView
+        doc=self.save()
+        aircraft=dict(status='complete',regional_observed=True,registration_observed=True,naval_complete=True,
+                      rows=[dict(country=1,tag='JAP',category='carrier_bomber',registered=77,candidate=77,naval_ready=77,naval_assigned=77),
+                            dict(country=2,tag='USA',category='carrier_fighter',registered=30,candidate=30,escort=30)])
+        (self.folder/'air_participants.json').write_text(json.dumps(aircraft),encoding='utf-8')
+        doc['air_participants']=dict(status='complete',storage='air_participants.json',row_count=2)
+        app.save_report(self.folder,[10,4,6,1,10,4,0,0,0,0],doc)
+        w,v=self.open();v.tabs.select(5);self.root.update()
+        self.assertIsInstance(v.participant_view,ParticipantView)
+        tree=v.participant_view.tree;rows=[tree.item(r,'values') for r in tree.get_children()]
+        self.assertEqual(len(rows),10);self.assertTrue(any(r[0]=='日本 (JAP)' and r[1]=='この国の総数' and r[2]=='77' for r in rows))
+        self.assertFalse(v.body.winfo_ismapped());v.tabs.select(0);self.root.update()
+        self.assertEqual(len(v.rows),3)
+
+    def test_old_aircraft_record_is_unknown_not_zero(self):
+        self.save();w,v=self.open();v.tabs.select(5);self.root.update()
+        self.assertIn('旧記録',v.participant_view.caption.get())
+        self.assertEqual(len(v.participant_view.tree.get_children()),0)
+
 if __name__=='__main__':unittest.main()

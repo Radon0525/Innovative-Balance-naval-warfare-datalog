@@ -43,6 +43,11 @@ if(!CONFIG.test) {
       for(const r of p.returns)check(r.call_rva,r.call_bytes);
     }
   }
+  if(CONFIG.first_airplanes&&selected.includes('air')) {
+    if(!CONFIG.air_participant_layout||!CONFIG.details_layout)throw new Error('初回機数の検証情報がありません。');
+    for(const p of CONFIG.air_participant_layout.checks)check(p.rva,p.bytes);
+    for(const p of CONFIG.details_layout.checks)check(p.rva,p.bytes);
+  }
   try {
     if(CONFIG.details) {
       for(const kind of selected)installAttackScope(kind,module.base.add(CONFIG.probes[kind].entry_rva));
@@ -53,6 +58,7 @@ if(!CONFIG.test) {
     }
     for(const [name,address] of addresses) install(name,address);
     if(CONFIG.details&&selected.includes('air'))installAirTrace();
+    if(CONFIG.first_airplanes&&selected.includes('air'))installAirParticipants();
     Interceptor.flush();
   } catch(error) {
     for(const listener of listeners) listener.detach();
@@ -65,9 +71,12 @@ function snapshot() {
 }
 rpc.exports={
   snapshot,
+  airparticipants:snapshotAirParticipants,
+  ackairparticipants:acknowledgeAirParticipants,
   details:snapshotDetails,
   detailsdelta:deltaDetails,
   async stop() {
+    stopAirParticipants();
     for(const listener of listeners) listener.detach();
     listeners=[];
     Interceptor.flush();

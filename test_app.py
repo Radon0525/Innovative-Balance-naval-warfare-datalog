@@ -36,6 +36,8 @@ class AppTests(unittest.TestCase):
             script.exports_sync.snapshot.return_value=['0']*10
             script.exports_sync.stop.return_value=list(map(str,SAMPLE))
             script.exports_sync.detailsdelta.return_value={'schema_version':2,'stats':{'events':13,'read_errors':0,'pair_overflow':0,'sample_omitted':0},'pairs':[],'samples':[],'channels':{},'pair_limit':20000,'sample_limit':2000}
+            aircraft={'status':'complete','rows':[{'country':1,'category':'carrier_bomber','naval_ready':77}]}
+            script.exports_sync.airparticipants.side_effect=[aircraft,dict(status='complete',storage='air_participants.json',row_count=1)]
             events=[]
             def notify(event):
                 events.append(event)
@@ -43,12 +45,15 @@ class AppTests(unittest.TestCase):
             recorder=app.Recorder(notify)
             with patch('frida.get_local_device',return_value=device),patch.object(app,'BASE',Path(folder)),\
                  patch.object(app,'process_path',return_value=Path('hoi4.exe')),\
-                 patch.object(app,'profile_for',return_value={'version':'test','sha256':'test'}),\
+                 patch.object(app,'profile_for',return_value={'version':'test','sha256':'test','air_participant_layout':{'version':1}}),\
                  patch.object(app,'source',return_value='test'):
                 self.assertTrue(recorder.run())
             doc=json.loads((recorder.folder/'summary.json').read_text(encoding='utf-8'))
             self.assertEqual(doc['status'],'停止済み')
             self.assertEqual(doc['counts']['air_successes'],26)
+            self.assertEqual(doc['air_participants']['row_count'],1);self.assertNotIn('rows',doc['air_participants'])
+            self.assertEqual(json.loads((recorder.folder/'air_participants.json').read_text(encoding='utf-8')),aircraft)
+            script.exports_sync.ackairparticipants.assert_called_once()
             with (recorder.folder/'checkpoints.csv').open(encoding='utf-8-sig',newline='') as file:rows=list(csv.reader(file))
             self.assertEqual(len(rows),3)
             self.assertEqual(list(map(int,rows[-1][2:])),SAMPLE)

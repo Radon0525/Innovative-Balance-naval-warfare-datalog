@@ -18,6 +18,8 @@ def load_countries(folder):
     folder=Path(folder);doc=json.loads((folder/'summary.json').read_text(encoding='utf-8'))
     reader=DetailReader(folder,doc);latest=reader.latest_document()
     if doc.get('updated_at','')>=latest.get('updated_at',''):latest.update({k:doc[k] for k in ('status','ended_at','error') if k in doc})
+    from air_participants import resolve_document
+    latest=resolve_document(folder,latest)
     reader.details=latest.get('details') or {};matches={};tags={}
     for p in reader.iter_pairs():
         a=p['source'].get('country') or 0;b=p['target'].get('country') or 0;key=tuple(sorted((a,b)))
@@ -47,7 +49,7 @@ class CountryOverview(ttk.Frame):
         self.tab='summary'
         if details:
             self.tabs=ttk.Notebook(self,height=1);self.tabs.pack(fill='x',pady=5)
-            for title in ('国別集計','艦 → 艦の砲撃','航空攻撃・Naval Strike','個別判定の例','艦載機の計算（各国5件）'):self.tabs.add(ttk.Frame(self.tabs),text=title)
+            for title in ('国別集計','艦 → 艦の砲撃','航空攻撃・Naval Strike','個別判定の例','艦載機の計算（各国5件）','初回の航空機数'):self.tabs.add(ttk.Frame(self.tabs),text=title)
             self.tabs.bind('<<NotebookTabChanged>>',self.change_tab)
         self.body=ttk.Frame(self);self.body.pack(fill='both',expand=True)
         self.body.columnconfigure(0,weight=1,uniform='countries');self.body.columnconfigure(1,weight=1,uniform='countries');self.body.rowconfigure(0,weight=1)
@@ -67,7 +69,10 @@ class CountryOverview(ttk.Frame):
                 label=tk.StringVar();self.page_labels.append(label);ttk.Label(nav,textvariable=label).pack(side='left',padx=6)
                 ttk.Button(nav,text='次へ',command=lambda index=i:self.move(index,1)).pack(side='left')
         self.note=tk.StringVar(value='国名・命中・耐久／指揮統制ダメージは、記録内の攻撃から自動集計します。')
-        ttk.Label(self,textvariable=self.note,wraplength=1100,justify='left').pack(anchor='w',pady=4)
+        self.note_label=ttk.Label(self,textvariable=self.note,wraplength=1100,justify='left');self.note_label.pack(anchor='w',pady=4)
+        if details:
+            from air_participants import ParticipantView
+            self.participant_view=ParticipantView(self)
     def selection(self):return None,'all'
     def reset(self):
         self.generation+=1;self.folder=None;self.reader=None;self.matches=[];self.pending=False;self.match_key=None
@@ -93,7 +98,7 @@ class CountryOverview(ttk.Frame):
                     text='左国 → 右国の攻撃を左に、右国 → 左国の攻撃を右に表示。複数国の記録は対戦国ごとに分けます。'
                     if not self.matches:text='国別の攻撃記録がまだありません。国情報のない旧記録からは国別結果を復元できません。'
                     if s.get('pair_overflow') or s.get('read_errors') or any(d.get('damage_stats',{}).values()):text+=' 注意：未収録・未測定の詳細があります。'
-                    if self.tab!='air_examples':self.note.set(text)
+                    if self.tab not in ('air_examples','air_participants'):self.note.set(text)
             self.start_worker()
         run_job(self,lambda:load_countries(folder),done)
     def name(self,country):return country_name(country,self.tags.get(country))
@@ -110,11 +115,16 @@ class CountryOverview(ttk.Frame):
         selected=self.match_tree.selection()
         if selected:self.match_key=self.matches[int(selected[0])]['key'];self.pages=[0,0];self.draw()
     def change_tab(self,event=None):
-        self.tab=['summary','heavy','air','samples','air_examples'][self.tabs.index(self.tabs.select())];self.pages=[0,0];self.draw()
-        if self.tab!='air_examples':self.note.set('左国 → 右国の攻撃を左に、右国 → 左国の攻撃を右に表示。各行の内訳はダブルクリックで開きます。')
+        self.tab=['summary','heavy','air','samples','air_examples','air_participants'][self.tabs.index(self.tabs.select())];self.pages=[0,0];self.draw()
+        if self.tab not in ('air_examples','air_participants'):self.note.set('左国 → 右国の攻撃を左に、右国 → 左国の攻撃を右に表示。各行の内訳はダブルクリックで開きます。')
     def move(self,index,delta):self.pages[index]+=delta;self.draw()
     def draw(self):
         self.rows.clear()
+        if self.details:
+            if self.tab=='air_participants':
+                self.body.pack_forget();self.participant_view.pack(fill='both',expand=True,before=self.note_label)
+                self.participant_view.set_document(getattr(self,'document',{}));self.note.set('この記録の初回だけを表示します。過去の試合とは合算しません。');return
+            self.participant_view.pack_forget();self.body.pack(fill='both',expand=True,before=self.note_label)
         for tree in self.trees:
             tree.configure(selectmode='browse')
             tree.delete(*tree.get_children())

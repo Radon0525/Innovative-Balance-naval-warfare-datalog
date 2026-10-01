@@ -32,6 +32,7 @@ def source(config):
             (BASE/'details.js').read_text(encoding='utf-8')+'\n'+
             (BASE/'air_trace.js').read_text(encoding='utf-8')+'\n'+
             (BASE/'air_attack_build.js').read_text(encoding='utf-8')+'\n'+
+            (BASE/'air_participants.js').read_text(encoding='utf-8')+'\n'+
             (BASE/'agent.js').read_text(encoding='utf-8'))
 
 def profile_for(path):
@@ -92,7 +93,7 @@ class Recorder:
         self.stop_event=threading.Event()
         self.folder=None
 
-    def run(self,pid=None,mode='both',interval=5,details=True,recording_name=''):
+    def run(self,pid=None,mode='both',interval=5,details=True,recording_name='',first_airplanes=True):
         import frida
         session=script=None; meta=None; counts=[0]*len(KEYS); failure=None;detail_writer=None
         detached=threading.Event(); agent_errors=queue.Queue()
@@ -103,7 +104,8 @@ class Recorder:
             if len(found)!=1:
                 raise RuntimeError('HOI4を1つ起動してから「収集開始」を押してください。\n複数起動時はCLIの --pid で指定できます。')
             pid=found[0].pid; exe=process_path(pid); profile=profile_for(exe)
-            profile=dict(profile,mode=mode,details=details)
+            census=bool(first_airplanes and mode!='heavy' and profile.get('air_participant_layout'))
+            profile=dict(profile,mode=mode,details=details,first_airplanes=census)
             self.folder=BASE/'recordings'/(datetime.now().strftime('%Y%m%d-%H%M%S')+'-'+uuid.uuid4().hex[:6])
             self.folder.mkdir(parents=True)
             from session_history import save_notes
@@ -113,6 +115,7 @@ class Recorder:
                   'interval_seconds':interval,'format_version':3,'details_enabled':details,'session_id':self.folder.name,'edition':'standard',
                   'scope':'All observed calls in this process; heavy gun decisions and naval-air successful-plane calculation',
                   'checkpoint_semantics':'Cumulative since attach. Do not sum rows.'}
+            meta['first_airplanes_enabled']=census
             save_report(self.folder,counts,meta)
             session=device.attach(pid)
             session.on('detached',lambda *args:detached.set())
@@ -134,6 +137,15 @@ class Recorder:
                     counts=new; meta['updated_at']=utc()
                     meta['elapsed_seconds']=round(time.monotonic()-started,3)
                     if final:meta['ended_at']=meta['updated_at']
+                    if census:
+                        aircraft=script.exports_sync.airparticipants()
+                        if aircraft.get('status') in ('complete','partial') and 'rows' in aircraft:
+                            aircraft_rows=len(aircraft['rows'])
+                            atomic_text(self.folder/'air_participants.json',json.dumps(aircraft,ensure_ascii=False,indent=2)+'\n')
+                            script.exports_sync.ackairparticipants()
+                            aircraft={k:v for k,v in aircraft.items() if k!='rows'}
+                            aircraft.update(storage='air_participants.json',row_count=aircraft_rows)
+                        meta['air_participants']=aircraft
                     if details:
                         delta=script.exports_sync.detailsdelta()
                         meta['details']=detail_writer.apply(delta,dict(meta,counts=metrics(counts)))
@@ -197,6 +209,9 @@ def gui(initial_mode='both',smoke_test=False):
     details_enabled=tk.BooleanVar(value=True)
     detail_check=ttk.Checkbutton(frame,text='艦別・発進元別の詳細も記録する',variable=details_enabled)
     detail_check.pack(anchor='w',pady=4)
+    first_airplanes=tk.BooleanVar(value=True)
+    participant_check=ttk.Checkbutton(frame,text='初回の航空機数を記録（取得後は追加観測を終了）',variable=first_airplanes)
+    participant_check.pack(anchor='w',pady=2)
     detail_status=tk.StringVar(value='詳細：収集開始後に保存します。')
     ttk.Label(frame,textvariable=detail_status,justify='left',wraplength=760).pack(anchor='w',pady=8)
     ttk.Label(frame,text='対戦国を自動集計し、両国の命中・ダメージを左右に表示します。\n航空の成功機数はグループ単位です。実時間5秒おきに自動保存します。\n詳細計測を有効にすると負荷が増えます。実戦・長時間・マルチ同期は未検証です。',wraplength=760).pack(anchor='w',pady=10)
@@ -211,10 +226,10 @@ def gui(initial_mode='both',smoke_test=False):
     def start():
         active[0]=Recorder(events.put);display([0]*10);overview.reset()
         start_button.config(state='disabled');stop_button.config(state='normal');selector.config(state='disabled')
-        detail_check.config(state='disabled');detail_status.set('詳細を準備中…' if details_enabled.get() else '詳細：無効')
+        detail_check.config(state='disabled');participant_check.config(state='disabled');detail_status.set('詳細を準備中…' if details_enabled.get() else '詳細：無効')
         name_entry.config(state='disabled')
         status.set('実行ファイルを確認して接続中…')
-        threading.Thread(target=active[0].run,kwargs={'mode':selected(),'details':details_enabled.get(),'recording_name':recording_name.get()},daemon=False).start()
+        threading.Thread(target=active[0].run,kwargs={'mode':selected(),'details':details_enabled.get(),'recording_name':recording_name.get(),'first_airplanes':first_airplanes.get()},daemon=False).start()
     def stop():
         if active[0]:active[0].stop_event.set();status.set('保存して停止中…')
     def result():
@@ -226,6 +241,12 @@ def gui(initial_mode='both',smoke_test=False):
     stop_button=ttk.Button(buttons,text='停止・保存',command=stop,state='disabled');stop_button.pack(side='left',padx=8)
     result_button=ttk.Button(buttons,text='結果・詳細',command=result);result_button.pack(side='left',padx=8)
     folder_button=ttk.Button(buttons,text='保存先を開く',command=folder,state='normal' if last_folder[0] else 'disabled');folder_button.pack(side='left',padx=8)
+    def participants():
+        if last_folder[0]:
+            from air_participants import show_participants
+            show_participants(root,last_folder[0])
+        else:messagebox.showinfo('初回の航空機数','保存された記録はまだありません。',parent=root)
+    ttk.Button(buttons,text='初回の航空機数',command=participants).pack(side='left',padx=8)
     from session_history import show_history
     ttk.Button(buttons,text='過去の記録・比較',command=lambda:show_history(root,BASE)).pack(side='left',padx=8)
     def poll():
@@ -241,7 +262,7 @@ def gui(initial_mode='both',smoke_test=False):
                 detail_status.set(f"組合せ {d.get('pair_count',0):,}件 · 読取エラー {d['stats']['read_errors']:,}回 · 上限超過 {d['stats']['pair_overflow']:,}回")
             if event.get('done'):
                 active[0]=None;start_button.config(state='normal');stop_button.config(state='disabled');selector.config(state='readonly')
-                detail_check.config(state='normal')
+                detail_check.config(state='normal');participant_check.config(state='normal')
                 name_entry.config(state='normal')
                 if event.get('error') and not smoke_test:messagebox.showerror('海戦の命中記録',event['error'])
                 if closing[0]:root.destroy();return
@@ -261,13 +282,14 @@ def main():
     parser.add_argument('--mode',choices=list(MODES),default='both')
     parser.add_argument('--cli',action='store_true');parser.add_argument('--pid',type=int)
     parser.add_argument('--check',type=Path);parser.add_argument('--ui-check',action='store_true')
-    parser.add_argument('--no-details',action='store_true',help='CLI: use only the lightweight native total counters')
+    parser.add_argument('--no-details',action='store_true',help='CLI: disable ship-level detail recording')
     parser.add_argument('--name',default='',help='CLI: name this recording / trial')
+    parser.add_argument('--no-first-airplanes',action='store_true',help='Disable the one-update aircraft census')
     args=parser.parse_args()
     if args.check:print(json.dumps(profile_for(args.check),ensure_ascii=False,indent=2));return 0
     if args.cli:
         recorder=Recorder(lambda event:print(json.dumps(event,ensure_ascii=False),flush=True))
         signal.signal(signal.SIGINT,lambda *args:recorder.stop_event.set())
-        return 0 if recorder.run(pid=args.pid,mode=args.mode,details=not args.no_details,recording_name=args.name) else 1
+        return 0 if recorder.run(pid=args.pid,mode=args.mode,details=not args.no_details,recording_name=args.name,first_airplanes=not args.no_first_airplanes) else 1
     gui(args.mode,args.ui_check);return 0
 if __name__=='__main__':sys.exit(main())
